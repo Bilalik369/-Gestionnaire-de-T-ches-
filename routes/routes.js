@@ -33,4 +33,17 @@ routes.get('/getall', async( req , res ) => {
     }catch(error){
         res.status(500).json({message :'Erreur lors de la récupération des tâches' , error: error.message});
     }
-})
+});
+
+routes.get('/get/:id' , async( req , res) =>{
+    try {
+        const tasks = await Task.findById(req.params.id);
+        res.json(tasks);
+
+    }catch(error){
+        res.status(500).json({error : 'Erreur lors de la récupération des tâches' });
+
+    }
+});
+
+
