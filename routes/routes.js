@@ -45,5 +45,27 @@ routes.get('/get/:id' , async( req , res) =>{
 
     }
 });
+ 
+ routes.put('/put/:id', async(req , res) => {
+        const {id} = req.params;
+        const {completed} = req.body;   
+        if (completed === undefined){
+            return res.status(400).json({message : 'Le statut Terminé est requis'});
+        }
 
+        try {
+            const task = await Task.findById(id);
+            if(!task){
+            res.status(404).json({message :'la tache n est pas  trouve'});
+        }
+        task.completed = completed;
+        await task.save();
+        res.json(task);
+        }catch (error ){
+            res.status(500).json({message : 'error de modifier la tache'});
+        }
+    
+ });
+ 
+ 
 
