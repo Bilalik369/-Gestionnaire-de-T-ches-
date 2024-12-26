@@ -66,6 +66,19 @@ routes.get('/get/:id' , async( req , res) =>{
         }
     
  });
- 
- 
 
+ 
+routes.delete('/deleted/:id' , async(req ,res ) => {
+    const {id} = req.params;
+    try{
+        const task = await Task.findByIdAndDelete(id);
+        if(!task){
+            return res.status(404).json({message : 'la tache n est pas  trouvee'});
+        }
+        res.json({message: 'La tâche a été supprimée avec succès'});
+    }catch(error){
+        res.status(500).json({message :' error de suppreme ce tache'})
+    }
+});
+  
+module.exports = routes;

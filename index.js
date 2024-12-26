@@ -15,7 +15,7 @@ mongoose.connect('mongodb://127.0.0.1:27017').then(() => {
 });
 
 
-// app.use('/api', taskRoutes);
+ app.use('/api', taskRoutes);
 
 const port = 3000;
 
